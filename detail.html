@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>detail</title>
+    <style>
+      #infoContainer {
+        width: 80%;
+        margin: 0 auto;
+        flex-wrap: wrap;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .info {
+        font-size: 20px;
+        font-weight: bold;
+      }
+      .info > div {
+        color: rgb(15, 131, 15);
+        font-weight: 500;
+      }
+      #campany {
+        color: blue;
+      }
+      .companyInfo {
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="infoContainer">
+      <div class="info">
+        name:
+        <div id="name">info</div>
+      </div>
+      <div class="info">
+        user_name:
+        <div id="user_name">info</div>
+      </div>
+      <div class="info">
+        email:
+        <div id="email">info</div>
+      </div>
+      <div class="info">
+        phone:
+        <div id="phone">info</div>
+      </div>
+      <div class="info">
+        website:
+        <div id="website">info</div>
+      </div>
+      <div class="info">
+        address:
+        <div id="address">info</div>
+      </div>
+      <div class="info">
+        company:
+        <div id="campany">
+          <div>
+            company name:
+            <div class="companyInfo" id="companyName"></div>
+          </div>
+          <div>
+            companyBs:
+            <div class="companyInfo" id="companyBs"></div>
+          </div>
+          <div>
+            catch phrase :
+            <div class="companyInfo" id="catchPhrase"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const Name = document.getElementById('name');
+      const userName = document.getElementById('user_name');
+      const userEmail = document.getElementById('email');
+      const userPhone = document.getElementById('phone');
+      const userWebsite = document.getElementById('website');
+      const userAddress = document.getElementById('address');
+      const userCompany = document.getElementById('companyName');
+      const userCompanyBs = document.getElementById('companyBs');
+      const userCatchPhrase = document.getElementById('catchPhrase');
+      window.onload = () => {
+        const userId = new URLSearchParams(window.location.search).get(
+          'userId'
+        );
+        fetch('http://jsonplaceholder.typicode.com/users/' + userId)
+          .then((response) => response.json())
+          .then((userData) => {
+            console.log(userData);
+            Name.innerText = userData.name;
+            userName.innerText = userData.username;
+            userEmail.innerText = userData.email;
+            userPhone.innerText = userData.phone;
+            userWebsite.innerText = userData.website;
+            userAddress.innerText = `${userData.address.city},${userData.address.street},${userData.address.suite}, zipcod :${userData.address.zipcode} , geo : lat =${userData.address.geo.lat}, lng =${userData.address.geo.lng}`;
+            userCompany.innerText = userData.company.name;
+            userCompanyBs.innerText = userData.company.bs;
+            userCatchPhrase.innerText = userData.company.catchPhrase;
+          });
+      };
+    </script>
+  </body>
+</html>

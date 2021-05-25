@@ -90,6 +90,7 @@
           .then((data) =>
             data.map((user) => {
               if (infoType.value === 'name') {
+                console.log(user);
                 Li = document.createElement('LI');
                 Li.style.cursor = 'pointer';
                 Li.innerHTML = user.name;
@@ -97,7 +98,7 @@
                 Li.addEventListener(
                   'click',
                   () =>
-                    (adress.innerText = ` address of clicked user is ${user.address.city},${user.address.street},${user.address.suite},(${user.address.zipcode})`)
+                    (adress.innerHTML = `<a style="color:black;" href="detail.html?userId=${user.id}">address of <span style="color:blue;">${user.name}</span>  is ${user.address.city},${user.address.street},${user.address.suite},(${user.address.zipcode})</a> <div style="color:red;">click to see all informations of ${user.name}</div>`)
                 );
 
                 Email.innerHTML = '';
@@ -110,7 +111,7 @@
                 Li.addEventListener(
                   'click',
                   () =>
-                    (adress.innerText = ` address of clicked user is ${user.address.city},${user.address.street},${user.address.suite},(${user.address.zipcode})`)
+                    (adress.innerHTML = ` <a style="color:black;" href="detail.html?userId=${user.id}">address of <span style="color:blue;">${user.name}</span>  is ${user.address.city},${user.address.street},${user.address.suite},(${user.address.zipcode})</a> <div style="color:red;">click to see all informations of ${user.name}</div> `)
                 );
                 userName.innerHTML = '';
                 Name.innerHTML = '';
@@ -122,7 +123,7 @@
                 Li.addEventListener(
                   'click',
                   () =>
-                    (adress.innerText = ` address of clicked user is ${user.address.city},${user.address.street},${user.address.suite},(${user.address.zipcode})`)
+                    (adress.innerHTML = ` <a style="color:black;" href="detail.html?userId=${user.id}">address of <span style="color:blue;">${user.name}</span>  is ${user.address.city},${user.address.street},${user.address.suite},(${user.address.zipcode})</a> <div style="color:red;">click to see all informations of ${user.name}</div>`)
                 );
                 Email.innerHTML = '';
                 Name.innerHTML = '';
