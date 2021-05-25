@@ -70,12 +70,15 @@
           <ol></ol>
         </div>
       </div>
+      <div id="adress"></div>
     </div>
+
     <script>
       const searchInput = document.querySelector('#userSearch');
       const Name = document.querySelector('.Names ol');
       const userName = document.querySelector('.user_names ol');
       const Email = document.querySelector('.Emails ol');
+      const adress = document.querySelector('#adress');
 
       function getUsersTypeInfo() {
         fetch('http://jsonplaceholder.typicode.com/users')
@@ -83,21 +86,40 @@
           .then((data) =>
             data.map((user) => {
               if (infoType.value === 'name') {
+                console.log(user);
                 Li = document.createElement('LI');
-                Li.innerText = user.name;
+                Li.style.cursor = 'pointer';
+                Li.innerHTML = user.name;
                 Name.appendChild(Li);
+                Li.addEventListener(
+                  'click',
+                  () =>
+                    (adress.innerText = ` address of clicked user is ${user.address.city},${user.address.street},${user.address.suite},(${user.address.zipcode})`)
+                );
                 Email.innerHTML = '';
                 userName.innerHTML = '';
               } else if (infoType.value === 'email') {
                 Li = document.createElement('LI');
                 Li.innerText = user.email;
+                Li.style.cursor = 'pointer';
                 Email.appendChild(Li);
+                Li.addEventListener(
+                  'click',
+                  () =>
+                    (adress.innerText = ` address of clicked user is ${user.address.city},${user.address.street},${user.address.suite},(${user.address.zipcode})`)
+                );
                 userName.innerHTML = '';
                 Name.innerHTML = '';
               } else if (infoType.value === 'username') {
                 Li = document.createElement('LI');
                 Li.innerText = user.username;
+                Li.style.cursor = 'pointer';
                 userName.appendChild(Li);
+                Li.addEventListener(
+                  'click',
+                  () =>
+                    (adress.innerText = ` address of clicked user is ${user.address.city},${user.address.street},${user.address.suite},(${user.address.zipcode})`)
+                );
                 Email.innerHTML = '';
                 Name.innerHTML = '';
               }
