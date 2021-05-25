@@ -56,6 +56,8 @@
         <label for="user"></label>
         <input type="text" id="userSearch" placeholder="search for user" />
       </form>
+      <button id="ascending" onclick="Sorting()">sort ascending</button>
+      <button id="descending" onclick="SortingDesc()">sort descending</button>
       <div class="All_users d-flex justify-content-between">
         <div class="Names">
           Names
@@ -79,6 +81,8 @@
       const userName = document.querySelector('.user_names ol');
       const Email = document.querySelector('.Emails ol');
       const adress = document.querySelector('#adress');
+      const ascendingBtn = document.querySelector('#ascending');
+      const descendingBtn = document.querySelector('#descending');
 
       function getUsersTypeInfo() {
         fetch('http://jsonplaceholder.typicode.com/users')
@@ -86,7 +90,6 @@
           .then((data) =>
             data.map((user) => {
               if (infoType.value === 'name') {
-                console.log(user);
                 Li = document.createElement('LI');
                 Li.style.cursor = 'pointer';
                 Li.innerHTML = user.name;
@@ -96,6 +99,7 @@
                   () =>
                     (adress.innerText = ` address of clicked user is ${user.address.city},${user.address.street},${user.address.suite},(${user.address.zipcode})`)
                 );
+
                 Email.innerHTML = '';
                 userName.innerHTML = '';
               } else if (infoType.value === 'email') {
@@ -138,6 +142,79 @@
           }
         });
       });
+      const Sorting = () => {
+        const userss = document.querySelectorAll('li');
+        const user_array = [];
+        Name.innerHTML = '';
+        Email.innerHTML = '';
+        userName.innerHTML = '';
+        Array.from(userss).map((user) => {
+          user_array.push(user.textContent);
+        });
+        if (infoType.value === 'name') {
+          user_array.sort().map((user) => {
+            Li = document.createElement('LI');
+            Li.style.cursor = 'pointer';
+            Li.innerHTML = user;
+            Name.appendChild(Li);
+          });
+        } else if (infoType.value === 'email') {
+          user_array.sort().map((user) => {
+            Li = document.createElement('LI');
+            Li.style.cursor = 'pointer';
+            Li.innerHTML = user;
+            Email.appendChild(Li);
+          });
+        } else if (infoType.value === 'username') {
+          user_array.sort().map((user) => {
+            Li = document.createElement('LI');
+            Li.style.cursor = 'pointer';
+            Li.innerHTML = user;
+            userName.appendChild(Li);
+          });
+        }
+      };
+      const SortingDesc = () => {
+        const userss = document.querySelectorAll('li');
+        const user_array = [];
+        Name.innerHTML = '';
+        Email.innerHTML = '';
+        userName.innerHTML = '';
+        Array.from(userss).map((user) => {
+          user_array.push(user.textContent);
+        });
+        if (infoType.value === 'name') {
+          user_array
+            .sort()
+            .reverse()
+            .map((user) => {
+              Li = document.createElement('LI');
+              Li.style.cursor = 'pointer';
+              Li.innerHTML = user;
+              Name.appendChild(Li);
+            });
+        } else if (infoType.value === 'email') {
+          user_array
+            .sort()
+            .reverse()
+            .map((user) => {
+              Li = document.createElement('LI');
+              Li.style.cursor = 'pointer';
+              Li.innerHTML = user;
+              Email.appendChild(Li);
+            });
+        } else if (infoType.value === 'username') {
+          user_array
+            .sort()
+            .reverse()
+            .map((user) => {
+              Li = document.createElement('LI');
+              Li.style.cursor = 'pointer';
+              Li.innerHTML = user;
+              userName.appendChild(Li);
+            });
+        }
+      };
     </script>
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
